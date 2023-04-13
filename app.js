@@ -55,11 +55,12 @@ function checkLetter(button) {
     for (let i = 0; i < letters.length; i++) {
          if (button.textContent === letters[i].textContent) {
             match = letters[i]; 
-            match.classList.add('show'); 
-            return match;
+            match.classList.add('show');   
         }
       } 
- };
+      return match;
+ }; 
+ 
 
 // --- listen for the onscreen keyboard to be clicked ---
 qwerty.addEventListener('click', (e) => { 
@@ -68,11 +69,11 @@ qwerty.addEventListener('click', (e) => {
         e.target.disabled = true;
     }
     const letterFound = checkLetter(e.target);
-    let hearts = document.querySelectorAll('.tries img').src;
+    let hearts = document.querySelectorAll('.tries img');
     if (letterFound === null){
         missed ++; 
         hearts[missed].src = "images/lostHeart.png"; 
-         
+      
       }
       //console.log(letterFound);
 });
