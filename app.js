@@ -3,9 +3,8 @@ const phrase = document.getElementById('phrase');
 const overlay = document.getElementById('overlay');
 const btnStart = document.getElementsByClassName('btn__reset')[0];
 const ul = document.querySelector('ul');
-const letters = document.querySelectorAll('letter');
-//const chosen = document.querySelector('.chosen');
-const buttons = document.querySelectorAll('button');
+const chosen = document.querySelector('.chosen');
+//const buttons = document.querySelectorAll('button');
 
 let missed = 0;
 
@@ -50,19 +49,17 @@ function addPhraseToDisplay(arr) {
 addPhraseToDisplay(getRandomPhrase);
 
 // --- check if a letter is in a phrase ---
-function checkLetter(buttons) {
+function checkLetter(button) {
+    const letters = document.querySelectorAll('.letter');
     let match = null;
     for (let i = 0; i < letters.length; i++) {
-         if (buttons.textContent === letters[i].textContent) {
+         if (button.textContent === letters[i].textContent) {
             match = letters[i]; 
             match.classList.add('show'); 
-        }else {
-            return null;
+            return match;
         }
-      }
-     return match;  
+      } 
  };
-
 
 // --- listen for the onscreen keyboard to be clicked ---
 qwerty.addEventListener('click', (e) => { 
@@ -70,5 +67,12 @@ qwerty.addEventListener('click', (e) => {
         e.target.classList.add('chosen');
         e.target.disabled = true;
     }
-     checkLetter('button');
+    const letterFound = checkLetter(e.target);
+    let hearts = document.querySelectorAll('.tries img').src;
+    if (letterFound === null){
+        missed ++; 
+        hearts[missed].src = "images/lostHeart.png"; 
+         
+      }
+      //console.log(letterFound);
 });
