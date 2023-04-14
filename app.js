@@ -28,9 +28,7 @@ function getRandomPhraseAsArray(arr) {
 const  getRandomPhrase = getRandomPhraseAsArray(phrases);
 //console.log(getRandomPhraseAsArray(phrases));
 
-// --- adds the letters of a stringvto the display! ---
-
-   
+// --- adds the letters of a stringvto the display! ---  
 function addPhraseToDisplay(arr) {
     for (let i = 0; i < arr.length; i++) {
       let li = document.createElement('li');
@@ -49,31 +47,47 @@ function addPhraseToDisplay(arr) {
 addPhraseToDisplay(getRandomPhrase);
 
 // --- check if a letter is in a phrase ---
-function checkLetter(button) {
+function checkLetter(button) { 
     const letters = document.querySelectorAll('.letter');
     let match = null;
     for (let i = 0; i < letters.length; i++) {
-         if (button.textContent === letters[i].textContent) {
+         if (letters[i].textContent === button.textContent) { 
             match = letters[i]; 
             match.classList.add('show');   
         }
       } 
       return match;
  }; 
- 
 
 // --- listen for the onscreen keyboard to be clicked ---
 qwerty.addEventListener('click', (e) => { 
-    if (e.target.tagName === 'BUTTON') {
+    if ('BUTTON' === e.target.tagName) {
         e.target.classList.add('chosen');
         e.target.disabled = true;
     }
     const letterFound = checkLetter(e.target);
     let hearts = document.querySelectorAll('.tries img');
-    if (letterFound === null){
-        missed ++; 
+    if (letterFound === null) {
         hearts[missed].src = "images/lostHeart.png"; 
-      
-      }
-      //console.log(letterFound);
-});
+        missed ++;
+    }
+    checkWin();
+}
+);
+
+function  checkWin() {
+    const letter = document.querySelectorAll('.letter');
+    const show = document.querySelectorAll('.show');
+    let title = document.querySelector('.title');
+    if (letter.length === show.length){
+        overlay.classList.add('win');
+        title.textContent = 'You won!';
+        overlay.style.display = 'flex';
+    }
+    else if (missed >= 5) {
+        overlay.classList.add('lose');
+        title.textContent = 'You lost!';
+        overlay.style.display = 'flex';
+    }
+ };
+
