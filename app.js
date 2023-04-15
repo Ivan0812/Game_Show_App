@@ -74,7 +74,7 @@ qwerty.addEventListener('click', (e) => {
     checkWin();
 }
 );
-
+// --- check if the game has benn won or lost ---
 function  checkWin() {
     const letter = document.querySelectorAll('.letter');
     const show = document.querySelectorAll('.show');
