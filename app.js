@@ -51,7 +51,7 @@ function checkLetter(button) {
     const letters = document.querySelectorAll('.letter');
     let match = null;
     for (let i = 0; i < letters.length; i++) {
-         if (letters[i].textContent === button.textContent) { 
+         if (letters[i].textContent.toLocaleLowerCase() === button.textContent) { 
             match = letters[i]; 
             match.classList.add('show');   
         }
