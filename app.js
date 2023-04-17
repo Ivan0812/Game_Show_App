@@ -61,16 +61,18 @@ function checkLetter(button) {
 
 // --- listen for the onscreen keyboard to be clicked ---
 qwerty.addEventListener('click', (e) => { 
+    //console.log(e.target);
     if ('BUTTON' === e.target.tagName) {
         e.target.classList.add('chosen');
         e.target.disabled = true;
-    }
-    const letterFound = checkLetter(e.target);
-    let hearts = document.querySelectorAll('.tries img');
+   
+         const letterFound = checkLetter(e.target);
+         let hearts = document.querySelectorAll('.tries img');
     if (letterFound === null) {
         hearts[missed].src = "images/lostHeart.png"; 
         missed ++;
-    }
+    } 
+  }
     checkWin();
 }
 );
@@ -90,4 +92,3 @@ function  checkWin() {
         overlay.style.display = 'flex';
     }
  };
-
